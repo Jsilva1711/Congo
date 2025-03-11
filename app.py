@@ -67,23 +67,28 @@ def do_login():
 
 @app.route("/register/", methods=["GET"])
 def register():
+    username = request.args.get("username")
+    if username:
+        existing_user = User.query.filter_by(username).first()
+        if existing_user:
+            return render_template("register.html", message="Username already taken.")
     return render_template("register.html")
-
-@app.route("/login/", methods=["POST"])
-def login_post():
-    username = request.form["username"]
-    password = request.form["password"]
-    
-    user = User.query.filter_by(username=username, password=password).first()
-
-    if user:
-        return redirect(url_for("items_sum_page"))
-
 
 
 @app.route("/items_sum_page/", methods=["GET"])
 def item_sum_page():
     return render_template("items_sum_page.html")
+
+@app.route("/cart/", methods=["GET"])
+def shopping_cart():
+    return render_template("cart.html")
+
+@app.route("/cart/", methods=["POST"]
+    cart_items = []
+    price_total = 0
+    
+    
+
 
 
 
