@@ -23,7 +23,7 @@ def check_login():
     else:
         return redirect(url_for("items_sum_page"))
 
-@app.route("/login/"), methods=["GET"])
+@app.route("/login/", methods=["GET"])
 def login():
     return render_template("login.html")
 
@@ -47,8 +47,19 @@ def do_login():
 def register():
     return render_template("register.html")
 
+@app.route("/login/", methods=["POST"])
+def login_post():
+    username = request.form["username"]
+    password = request.form["password"]
+    
+    user = User.query.filter_by(username=username, password=password).first()
 
-@app.route("/items_sum_page/"), methods=["GET"])
+    if user:
+        return redirect(url_for("items_sum_page"))
+
+
+
+@app.route("/items_sum_page/", methods=["GET"])
 def item_sum_page():
     return render_template("items_sum_page.html")
 

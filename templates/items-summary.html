@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>items-summary</title>
+
+  <link href="CSS_FILE HERE" rel="stylesheet">
+</head>
+
+<body>
+	<h1>Items Summary</h1>
+	<a href="{{ url_for('shopping_cart') }}">View Cart</a>
+	<ul>{% for item in item}
+		<li>
+			<img src=" {{ item.image }}" alt="{{ item.name }}" width="50">
+			<a href="{{ url_for('item_detal', item_id=item.id) }}">{{ item.name }}</a>
+		</li>
+	</ul>
+
+
+</body>
+
+</html>
