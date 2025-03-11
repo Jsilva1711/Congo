@@ -13,8 +13,30 @@ db = SQLAlchemy(app)
 
 from models import User
 
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    image = db.Column(db.String(200), nullable=False)
+    large_image = db.Column(db.String(200), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+
+
 with app.app_context():
     db.create_all()
+    if not Item.query.first():
+        items = [
+            Item(name='Pringles Can', image='pringles_small.jpg', large_image='pringles_large.jpg', price=3.99, description='A can of crispy Pringles chips.'),
+            Item(name='Glove', image='glove_small.jpg', large_image='glove_large.jpg', price=7.99, description='A single durable work glove.'),
+            Item(name='Sponges', image='sponges_small.jpg', large_image='sponges_large.jpg', price=5.99, description='A pack of three cleaning sponges.')
+        ]
+        db.session.bulk_save_objects(items)
+        db.session.commit()
 
 @app.before_request
 def check_login():
