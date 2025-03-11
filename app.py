@@ -30,11 +30,11 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
     if not Item.query.first():
-        items = [
-    Item(name='Pringles Can', image='pringles.jpg', large_image='pringles.jpg', price=3.99, description='A can of crispy Pringles chips.'),
-    Item(name='Glove', image='glove.jpg', large_image='glove.jpg', price=7.99, description='A single durable work glove.'),
-    Item(name='Sponges', image='sponges.jpg', large_image='sponges.jpg', price=5.99, description='A pack of three cleaning sponges.')
-]
+                items = [
+            Item(name='Pringles Can', image='static/img/pringles_small.jpg', large_image='static/img/pringles_large.jpg', price=3.99, description='A can of crispy Pringles chips.'),
+            Item(name='Glove', image='static/img/glove_small.jpg', large_image='static/img/glove_large.jpg', price=7.99, description='A single durable work glove.'),
+            Item(name='Sponges', image='static/img/sponges_small.jpg', large_image='static/img/sponges_large.jpg', price=5.99, description='A pack of three cleaning sponges.')
+        ]
     db.session.bulk_save_objects(items)
     db.session.commit()
 
