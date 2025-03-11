@@ -67,6 +67,11 @@ def do_login():
 
 @app.route("/register/", methods=["GET"])
 def register():
+    username = request.args.get("username")
+    if username:
+        existing_user = User.query.filter_by(username).first()
+        if existing_user:
+            return render_template("register.html", message="Username already taken.")
     return render_template("register.html")
 
 @app.route("/login/", methods=["POST"])
