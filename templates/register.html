@@ -1,0 +1,24 @@
+<!doctype html>
+
+<html>
+
+<head>
+		<title>Register Page</title>
+</head>
+
+<body>
+
+<h1>Register</h1>
+<form method="POST" action="{{ url_for('login')}}">
+		Username: <input name="new_username" type="text">
+		<br>
+		Real Name: <input name = "real_name" type="text">
+		<br>
+		Password: <input name="new_password" type="password">
+		<br>
+		<input type="submit" value="Register">
+</form>
+
+</body>
+
+</html>
