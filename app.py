@@ -23,12 +23,12 @@ def check_login():
     else:
         return redirect(url_for("items_sum_page"))
 
-@app.route("/login/"), methods=["GET"])
+@app.route("/login/", methods=["GET"])
 def login():
     return render_template ("login.html")
 
 
-@app.route("/items_sum_page/"), methods=["GET"])
+@app.route("/items_sum_page/", methods=["GET"])
 def item_sum_page():
     return render_template("items_sum_page.html")
 
