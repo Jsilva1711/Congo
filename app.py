@@ -74,6 +74,17 @@ def register():
 def item_sum_page():
     return render_template("items_sum_page.html")
 
+@app.route("/cart/", methods=["GET"])
+def shopping_cart():
+    return render_template("cart.html")
+
+@app.route("/cart/", methods=["POST"]
+    cart_items = []
+    price_total = 0
+    
+    
+
+
 
 
 
