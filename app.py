@@ -30,13 +30,13 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
     if not Item.query.first():
-        items = [
-            Item(name='Pringles Can', image='pringles_small.jpg', large_image='pringles_large.jpg', price=3.99, description='A can of crispy Pringles chips.'),
-            Item(name='Glove', image='glove_small.jpg', large_image='glove_large.jpg', price=7.99, description='A single durable work glove.'),
-            Item(name='Sponges', image='sponges_small.jpg', large_image='sponges_large.jpg', price=5.99, description='A pack of three cleaning sponges.')
+                items = [
+            Item(name='Pringles Can', image='static/img/pringles_small.jpg', large_image='static/img/pringles_large.jpg', price=3.99, description='A can of crispy Pringles chips.'),
+            Item(name='Glove', image='static/img/glove_small.jpg', large_image='static/img/glove_large.jpg', price=7.99, description='A single durable work glove.'),
+            Item(name='Sponges', image='static/img/sponges_small.jpg', large_image='static/img/sponges_large.jpg', price=5.99, description='A pack of three cleaning sponges.')
         ]
-        db.session.bulk_save_objects(items)
-        db.session.commit()
+    db.session.bulk_save_objects(items)
+    db.session.commit()
 
 @app.before_request
 def check_login():
@@ -67,6 +67,11 @@ def do_login():
 
 @app.route("/register/", methods=["GET"])
 def register():
+    username = request.args.get("username")
+    if username:
+        existing_user = User.query.filter_by(username).first()
+        if existing_user:
+            return render_template("register.html", message="Username already taken.")
     return render_template("register.html")
 
 
