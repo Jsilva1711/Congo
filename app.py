@@ -87,6 +87,24 @@ def shopping_cart():
     cart_items = []
     price_total = 0
 
+@app.route("/checkout/", methods=["GET"])
+def checkout():
+    return render_template("checkout.html")
+
+@app.route("/checkout/", methods=["POST"])
+def checkout_info():
+    cart = session['cart']
+    email = request.form['email']
+    ccn = request.form['ccn']
+    with open("orders.txt", 'a') as order:
+        for key, value in cart.items():
+            order.write(f"{key.title()} : {value}\n")
+        order.write("Email: " + email + '\n')
+        order.write("Credit Card Number: " + ccn + '\n' + '\n')
+    session["cart"] = session["cart"].clear()
+    return render_template("checkout.html", message="Your items are on the way!")
+
+
 @app.route("/orders/", methods=["GET"])
 def orders():
     with open("orders.txt", "r") as orders:
