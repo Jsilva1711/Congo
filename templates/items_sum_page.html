@@ -3,18 +3,21 @@
 <head>
     <title>Items</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-
 </head>
 <body>
     <h1>Available Items</h1>
     <ul>
         {% for item in items %}
         <li>
-            <h2>{{ item.name }}</h2>
-            <img src="{{ item.image }}" alt="{{ item.name }}" width="100"><br>
+            <h2>
+                <a href="{{ url_for('item_detail', item_id=item.id) }}">{{ item.name }}</a>
+            </h2>
+            <img src="{{ url_for('static', filename='img/' + item.image) }}" alt="{{ item.name }}" width="100">
+
         </li>
         {% endfor %}
     </ul>
     <a href="{{ url_for('shopping_cart') }}">Go to Cart</a>
 </body>
 </html>
+
