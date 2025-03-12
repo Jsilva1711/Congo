@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+{% if message %}
+<p style="color: red"> {{ message }}</p>
+{% end if %}
+<br>
+<h1>Cart:</h1>
+{% for item in cart %} {% endfor %}
+<table>
+		<thead>
+				<tr>
+					<th>Item</th>
+   					<th>Quatity</th>
+				</tr>
+		</thead>
+		<tbody>
+				<tr>
+						<td>{{ item.title() }}</td>
+						<td>{{ cart[item] }}</td>
+				</tr>
+		</tbody>
+</table>
+<form method="POST" action="{{ url_for('checkout') }}">
+	<label for="email">Email: </label>
+	<input type="text" name="email">
+	<br>
+	<br>
+	<label for="ccn">Credit Card Number: </label>
+	<input type="text" name="ccn">
+	<br>
+	<input type="submit" value="Checkout">
+</form>
+</body>
+
+</html>

@@ -99,22 +99,21 @@ def add_to_cart(item_id):
     session["cart"] = cart
     return redirect(url_for("Shopping_cart"))
 
-@app.route("/checkout/", methods=["GET"])
+@app.route("/checkout/", methods=["GET, POST"])
 def checkout():
-    return render_template("checkout.html")
-
-@app.route("/checkout/", methods=["POST"])
-def checkout_info():
-    cart = session['cart']
-    email = request.form['email']
-    ccn = request.form['ccn']
-    with open("orders.txt", 'a') as order:
-        for key, value in cart.items():
-            order.write(f"{key.title()} : {value}\n")
-        order.write("Email: " + email + '\n')
-        order.write("Credit Card Number: " + ccn + '\n' + '\n')
-    session["cart"] = session["cart"].clear()
-    return render_template("checkout.html", message="Your items are on the way!")
+    if request.method == "GET":
+        return render_template("checkout.html")
+    elif rewuest.method == "POST":
+        cart = session['cart']
+        email = request.form['email']
+        ccn = request.form['ccn']
+        with open("orders.txt", 'a') as order:
+            for key, value in cart.items():
+                order.write(f"{key.title()} : {value}\n")
+            order.write("Email: " + email + '\n')
+            order.write("Credit Card Number: " + ccn + '\n' + '\n')
+        session["cart"] = session["cart"].clear()
+        return render_template("checkout.html", message="Your items are on the way!")
 
 
 @app.route("/orders/", methods=["GET"])
