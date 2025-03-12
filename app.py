@@ -82,14 +82,14 @@ def item_sum_page():
 @app.route("/cart/", methods=["GET", "POST"])
 def shopping_cart():
     if request.method == "POST":
-        item_id =requestform.get("item_id")
+        item_id =request.form.get("item_id")
         cart = session.get("cart", [])
         cart.append(item_id)
         session["cart"] = cart
         return redirect(url_for("shopping_cart"))
     
     cart = session.get("cart", [])
-    items = Item.query.fillter(Item.id.in_(cart)).all()
+    items = Item.query.filter(Item.id.in_(cart)).all()
     return render_template("cart.html", cart=items)
 
 @app.route("/add_to_cart/<int:item_id>/", methods=["POST"])
