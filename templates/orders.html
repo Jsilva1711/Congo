@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+
     <title>Orders</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/cart">Cart</a>
+        <a href="/logout">Logout</a>
+    </div>
+
     <h1>All Orders</h1>
-    <ul>
-        {% for line in message %}
-        <li>{{ line }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{{ url_for('item_sum_page') }}">Back to Shop</a>
+
+    {% for order in orders %}
+        <div class="container">
+            <div class="header">Order #{{ order.id }}</div>
+            <div class="details"><strong>Name:</strong> {{ order.user.real_name }}</div>
+            <div class="details"><strong>Address:</strong> {{ order.user.address }}</div>
+            <div class="details"><strong>Items:</strong></div>
+            <ul class="list">
+                {% for order_item in order.orderitem_set %}
+                    <li>{{ order_item.item.name }} (x{{ order_item.quantity }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
 </body>
 </html>
 
