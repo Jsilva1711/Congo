@@ -78,7 +78,7 @@ def register():
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)  # Remove user_id from session
+    session.pop('user_id', None)
     return redirect(url_for('login'))
 
 @app.route("/items_sum_page/", methods=["GET"])
