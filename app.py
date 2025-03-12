@@ -76,6 +76,11 @@ def register():
 
     return render_template("register.html", message=None)
 
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)  # Remove user_id from session
+    return redirect(url_for('login'))
+
 @app.route("/items_sum_page/", methods=["GET"])
 def item_sum_page():
     items = Item.query.all()

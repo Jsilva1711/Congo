@@ -6,6 +6,19 @@
 
 </head>
 <body>
+
+ <nav>
+        <a href="{{ url_for('item_sum_page') }}">Shop</a>
+        <a href="{{ url_for('shopping_cart') }}">Cart</a>
+        
+        {% if 'user_id' in session %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </nav>
+
     <h1>Login</h1>
     <form method="POST">
         <label for="username">Username:</label>
