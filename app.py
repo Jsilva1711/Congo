@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os 
 
 app = Flask(__name__)
-app.secret_key = 'REPLACE_ME_WITH_RANDOM_CHARACTERS'
+app.secret_key = 'spe[vzsflm\;SERvsbsdsvgh,;s;scb'
 
 db_name = 'test.db'
 sqlite_uri = f'sqlite:///{os.path.abspath(os.path.curdir)}/{db_name}'
@@ -86,7 +86,15 @@ def shopping_cart():
 @app.route("/cart/", methods=["POST"]
     cart_items = []
     price_total = 0
-    
+
+@app.route("/orders/", methods=["GET"])
+def orders():
+    with open("orders.txt", "r") as orders:
+        content = orders.readlines()
+    return render_template("orders.html", message=content)
+
+
+
     
 
 
