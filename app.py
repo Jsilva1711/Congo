@@ -92,6 +92,13 @@ def shopping_cart():
     items = Item.query.fillter(Item.id.in_(cart)).all()
     return render_template("cart.html", cart=items)
 
+@app.route("/add_to_cart/<int:item_id>/", methods=["POST"])
+def add_to_cart(item_id):
+    cart = session.get("cart", [])
+    cart.append(item_id)
+    session{"cart"] = cart
+    return redirect(url_for("Shopping_cart"))
+
 @app.route("/checkout/", methods=["GET"])
 def checkout():
     return render_template("checkout.html")
