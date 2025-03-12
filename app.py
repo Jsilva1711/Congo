@@ -81,7 +81,9 @@ def item_sum_page():
 
 @app.route("/cart/", methods=["GET"])
 def shopping_cart():
-    return render_template("cart.html")
+    cart = session.get("cart", [])
+    items = Item.querry.filter(Item.id.in_(cart)).all()
+    return render_template("cart.html", cart=items)
 
 @app.route("/cart/", methods=["POST"]
     cart_items = []
