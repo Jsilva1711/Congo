@@ -11,7 +11,9 @@
         {% for item in items %}
         <li>
             <h2>{{ item.name }}</h2>
-            <img src="{{ item.image }}" alt="{{ item.name }}" width="100"><br>
+            <img src="{{ url_for('static', filename='img/Pringles Can.jpg') }}" alt="Pringles">
+	    <img src="{{ url_for('static', filename='img/glove.jpg') }}" alt="Glove">
+	    <img src="{{ url_for('static', filename='img/sponges.jpg') }}" alt="Sponges">
         </li>
         {% endfor %}
     </ul>
