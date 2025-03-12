@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>{{ item.name }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+    <h1>{{ item.name }}</h1>
+    <img src="{{ item.large_image }}" alt="{{ item.name }}" width="200">
+    <p><strong>Price:</strong> ${{ item.price }}</p>
+    <p><strong>Description:</strong> {{ item.description }}</p>
+
+    <form action="{{ url_for('add_to_cart', item_id=item.id) }}" method="POST">
+        <button type="submit">Add to Cart</button>
+    </form>
+    
+    <a href="{{ url_for('shopping_cart') }}">View Cart</a>
+</body>
+
+</html>
