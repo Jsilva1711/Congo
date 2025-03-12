@@ -96,7 +96,7 @@ def shopping_cart():
 def add_to_cart(item_id):
     cart = session.get("cart", [])
     cart.append(item_id)
-    session{"cart"] = cart
+    session["cart"] = cart
     return redirect(url_for("Shopping_cart"))
 
 @app.route("/checkout/", methods=["GET"])
