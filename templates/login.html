@@ -1,25 +1,22 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>login</title>
-
-  <link href="CSS_FILE HERE" rel="stylesheet">
+    <title>Login</title>
 </head>
-
 <body>
-	<h1>Login</h1>
-	<form action="/login/" method="POST">
-		<label for="username>">Username;</label>
-		<input type="text" id="username" name="username" required><br>
+    <h1>Login</h1>
+    <form method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
 
-
-		<label for="password>">Password;</label>
-		<input type="password" id="password" name="password" required><br>
-
-		<button type="submit">Login</button>
-	</form>
-	<a href="register.html">Don't have an account? Register here!</a>
+    {% if message %}
+        <p style="color: red;">{{ message }}</p>
+    {% endif %}
+    
+    <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
 </body>
-
 </html>

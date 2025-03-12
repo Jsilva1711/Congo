@@ -2,22 +2,21 @@
 <html>
 
 <head>
-	<title>{{ item.name }}</title>
-	<link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
-
+    <title>{{ item.name }}</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 </head>
 
 <body>
-	<h1> {{ item.name }}</h1>
-	<img src="{{ item.large_image }}" alt ="{{ item.name }}" width="200">
-	<p><strong>Price:</strong> ${{item.price}}</p>
-	<p><strong>Description:</strong> {{ item.price}}</p>
-	<form action=" {{ url_for('add_to_cart' , item_id=item.id) }}" method="POST">
-		<button type="submit">add to cart<button/>
-	</form>
-	<a href="{{ url_for('shopping_cart') }}">View cart</a>
+    <h1>{{ item.name }}</h1>
+    <img src="{{ item.large_image }}" alt="{{ item.name }}" width="200">
+    <p><strong>Price:</strong> ${{ item.price }}</p>
+    <p><strong>Description:</strong> {{ item.description }}</p>
 
-
+    <form action="{{ url_for('add_to_cart', item_id=item.id) }}" method="POST">
+        <button type="submit">Add to Cart</button>
+    </form>
+    
+    <a href="{{ url_for('shopping_cart') }}">View Cart</a>
 </body>
 
 </html>

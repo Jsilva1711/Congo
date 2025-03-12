@@ -1,41 +1,15 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <title>Checkout</title>
 </head>
-
 <body>
-
-{% if message %}
-<p style="color: red"> {{ message }}</p>
-{% end if %}
-<br>
-<h1>Cart:</h1>
-{% for item in cart %} {% endfor %}
-<table>
-		<thead>
-				<tr>
-					<th>Item</th>
-   					<th>Quatity</th>
-				</tr>
-		</thead>
-		<tbody>
-				<tr>
-						<td>{{ item.title() }}</td>
-						<td>{{ cart[item] }}</td>
-				</tr>
-		</tbody>
-</table>
-<form method="POST" action="{{ url_for('checkout') }}">
-	<label for="email">Email: </label>
-	<input type="text" name="email">
-	<br>
-	<br>
-	<label for="ccn">Credit Card Number: </label>
-	<input type="text" name="ccn">
-	<br>
-	<input type="submit" value="Checkout">
-</form>
+    <h1>Checkout</h1>
+    {% if message %}
+        <p style="color: green;">{{ message }}</p>
+    {% endif %}
+    
+    <p>Your items are being processed.</p>
+    <a href="{{ url_for('item_sum_page') }}">Back to Shop</a>
 </body>
-
 </html>

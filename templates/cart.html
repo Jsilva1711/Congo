@@ -1,29 +1,31 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Shopping Cart</title>
-    <link href="{{ url_for('static'), filename= 'style.css'}}" rel="stylesheet">
+    <title>Your Cart</title>
 </head>
-
 <body>
-    <h1>Shopping Cart</h1>
+    <h1>Your Cart</h1>
     {% if cart %}
         <ul>
-            {% for item in cart %}
-                <li>
-                    <img src="{{ item.image }}" alt="{{ item.name }}" width="100">
-                    <h3>{{ item.name }}</h3>
-                    <p><strong>Price:</strong> ${{ item.price }}</p>
-                </li>
+            {% for item_id, quantity in cart.items() %}
+            <li>
+                <h2>{{ items_dict[item_id].name }}</h2>
+                <p>Quantity: {{ quantity }}</p>
+                <p>Price: ${{ items_dict[item_id].price * quantity }}</p>
+            </li>
             {% endfor %}
         </ul>
+        <p><strong>Total: ${{ total_price }}</strong></p>
+        <form action="{{ url_for('checkout') }}" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="ccn">Credit Card Number:</label>
+            <input type="text" id="ccn" name="ccn" required><br><br>
+            <button type="submit">Checkout</button>
+        </form>
     {% else %}
-        <p>Your cart is empty.</p>
+        <p>Your cart is empty!</p>
     {% endif %}
-    
-    <a href="{{ url_for('items_sum_page') }}">Continue Shopping</a>
+    <a href="{{ url_for('item_sum_page') }}">Continue Shopping</a>
 </body>
-
 </html>
-
