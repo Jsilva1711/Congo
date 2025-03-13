@@ -8,7 +8,6 @@
     <nav>
         <a href="{{ url_for('item_sum_page') }}">Shop</a>
         <a href="{{ url_for('shopping_cart') }}">Cart</a>
-        
         {% if 'user' in session %}
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
@@ -20,10 +19,8 @@
     <ul>
         {% for item in items %}
         <li>
-            <h2>
-                <a href="{{ url_for('item_detail', item_id=item.id) }}">{{ item.name }}</a>
-            </h2>
-            <img src="{{ url_for('static', filename='img/' + item.image) }}" alt="{{ item.name }}" width="100">
+            <h2><a href="{{ url_for('item_detail', item_id=item.id) }}">{{ item.name }}</a></h2>
+            <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.name }}" width="100">
         </li>
         {% endfor %}
     </ul>

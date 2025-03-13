@@ -3,14 +3,11 @@
 <head>
     <title>Your Cart</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-
 </head>
 <body>
-
- <nav>
+    <nav>
         <a href="{{ url_for('item_sum_page') }}">Shop</a>
         <a href="{{ url_for('shopping_cart') }}">Cart</a>
-
         {% if 'user' in session %}
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
@@ -20,27 +17,20 @@
     </nav>
 
     <h1>Your Cart</h1>
-    {% if cart %}
-        <ul>
-            {% for item_id, quantity in cart.items() %}
+    <ul>
+        {% for cart_item in cart %}
             <li>
-                <h2>{{ items_dict[item_id].name }}</h2>
-                <p>Quantity: {{ quantity }}</p>
-                <p>Price: ${{ items_dict[item_id].price * quantity }}</p>
+                <h2>{{ cart_item.item.name }}</h2>
+                <img src="{{ url_for('static', filename=cart_item.item.image) }}" alt="{{ cart_item.item.name }}" width="100">
+                <p>Price: ${{ cart_item.item.price }}</p>
+                <p>Quantity: {{ cart_item.quantity }}</p>
             </li>
-            {% endfor %}
-        </ul>
-        <p><strong>Total: ${{ total_price }}</strong></p>
-        <form action="{{ url_for('checkout') }}" method="POST">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
-            <label for="ccn">Credit Card Number:</label>
-            <input type="text" id="ccn" name="ccn" required><br><br>
-            <button type="submit">Checkout</button>
-        </form>
-    {% else %}
-        <p>Your cart is empty!</p>
-    {% endif %}
-    <a href="{{ url_for('item_sum_page') }}">Continue Shopping</a>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ url_for('checkout') }}" method="POST">
+        <button type="submit">Proceed to Checkout</button>
+    </form>
 </body>
 </html>
+

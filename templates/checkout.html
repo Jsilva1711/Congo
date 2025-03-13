@@ -3,11 +3,10 @@
 <head>
     <title>Checkout</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-
 </head>
 <body>
 
- <nav>
+    <nav>
         <a href="{{ url_for('item_sum_page') }}">Shop</a>
         <a href="{{ url_for('shopping_cart') }}">Cart</a>
         
@@ -20,11 +19,30 @@
     </nav>
 
     <h1>Checkout</h1>
+    
     {% if message %}
         <p style="color: green;">{{ message }}</p>
     {% endif %}
     
+    {% if user %}
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Credit Card Number:</strong> {{ user.ccn }}</p>
+    {% else %}
+        <p>User not found. Please login.</p>
+    {% endif %}
+
+<form method="POST" action="{{ url_for('checkout') }}">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{ user.email }}" required><br><br>
+
+    <label for="ccn">Credit Card Number:</label>
+    <input type="text" id="ccn" name="ccn" value="{{ user.ccn }}" required><br><br>
+
+    <button type="submit">Checkout</button>
+</form>
+
     <p>Your items are being processed.</p>
     <a href="{{ url_for('item_sum_page') }}">Back to Shop</a>
 </body>
 </html>
+
